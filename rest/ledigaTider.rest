@@ -86,7 +86,7 @@ Content-Type: application/json
   "integratorLosen": "{{integratorLosen}}"
 }
 
-### Get Treatment Types (for particular therapist flow)
+### Get Treatment Types
 # @name get_treatment_types_therapist
 POST {{baseUrl}}/tdl/v1/behandlingstyper
 Content-Type: application/json
@@ -134,4 +134,103 @@ Content-Type: application/json
   "integratorKod": "{{integratorKod}}",
   "accessKod": "{{login_particular_therapist.response.body.accessKod}}"
 }
+
+
+
+### Retrieve free time slots with contiguous session
+# 1. Login - Authenticate user with credentials
+# 2. Get all treatment types - Retrieve available treatment types independent of therapist
+# 3. Get available time slots - Retrieve available time slots for different treatment types with contiguous session
+# 4. Logout - Terminate the session
+#
+# Calls: 
+#   /api/v1/login 
+#   /tdl/v1/behandlingstyper (with behandlareKod = "")
+#   /tdl/v1/ledigaTider (för t.ex. emergiencies)
+#   /tdl/v1/ledigaTider (för t.ex. revision)
+#   /tdl/v1/ledigaTider (för t.ex. root canal)
+#   /api/v1/logout
+# 
+# Notes:
+# - Only searching for free times in the future is allowed. 
+# - Currently, the maximum date range allowed is 1 month.
+
+### Login - get accessKod for contiguous sessions
+# @name login_contiguous_session
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Get Treatment Types
+# @name get_treatment_types_contiguous
+POST {{baseUrl}}/tdl/v1/behandlingstyper
+Content-Type: application/json
+  
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
+  "behandlareKod": ""
+}
+
+### Free slots - Akut fraktur
+# @name freeSlots_emergency
+POST {{baseUrl}}/tdl/v1/ledigaTider
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
+  "behandlareKod": "",
+  "behandlingstypKod": "{{get_treatment_types_contiguous.response.body.behandlingstyper[0].kod}}",
+  "datumStart": "2026-08-01",
+  "datumSlut": "2026-08-31"
+}
+
+### Free slots - Akut värk
+# @name freeSlots_revision
+POST {{baseUrl}}/tdl/v1/ledigaTider
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
+  "behandlareKod": "",
+  "behandlingstypKod": "{{get_treatment_types_contiguous.response.body.behandlingstyper[1].kod}}",
+  "datumStart": "2026-08-01",
+  "datumSlut": "2026-08-31"
+}
+
+### Free slots - Hygienistbehandling
+# @name freeSlots_root_canal
+POST {{baseUrl}}/tdl/v1/ledigaTider
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
+  "behandlareKod": "",
+  "behandlingstypKod": "{{get_treatment_types_contiguous.response.body.behandlingstyper[2].kod}}",
+  "datumStart": "2026-08-01",
+  "datumSlut": "2026-08-31"
+}
+
+### Logout 
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_contiguous_session.response.body.accessKod}}"
+} 
+
 
