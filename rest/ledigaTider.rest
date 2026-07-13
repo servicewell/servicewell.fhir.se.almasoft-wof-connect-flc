@@ -1,0 +1,137 @@
+@baseUrl = https://etand.se:16443
+@testClinic = 9002
+
+### Retrieve free time slot independent therapists
+# 1. Login - Authenticate user with credentials
+# 2. Get all treatment types - Retrieve available treatment types independent of therapist
+# 3. Get available time slots - Retrieve available time slots independent of therapist
+# 4. Logout - Terminate the session
+# Calls:
+#   /api/v1/login
+#   /tdl/v1/behandlingstyper (with behandlareKod = "")
+#   /tdl/v1/ledigaTider (with behandlareKod = "")
+#   /api/v1/logout
+
+### Login - get accessKod for treatment type
+# @name login_all_therapists
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Get Treatment Types
+# @name get_treatment_types
+POST {{baseUrl}}/tdl/v1/behandlingstyper
+Content-Type: application/json
+  
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_all_therapists.response.body.accessKod}}",
+  "behandlareKod": ""
+}
+
+### Free slots
+# @name freeSlots
+POST {{baseUrl}}/tdl/v1/ledigaTider
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_all_therapists.response.body.accessKod}}",
+  "behandlareKod": "",
+  "behandlingstypKod": "{{get_treatment_types.response.body.behandlingstyper[0].kod}}",
+  "datumStart": "2026-08-01",
+  "datumSlut": "2026-08-31"
+}
+
+### Logout
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_all_therapists.response.body.accessKod}}"
+}
+
+
+
+### Retrieve free time slots for a particular therapist
+# 1. Login - Authenticate user with credentials
+# 2. Get all treatment types - Retrieve available treatment types independent of therapist
+# 3. Get therapists - Retrieve available therapists for a specific treatment type
+# 4. Get available time slots - Retrieve available time slots for a specific therapist
+# 5. Logout - Terminate the session
+# Calls:
+#   /api/v1/login
+#   /tdl/v1/behandlingstyper (with behandlareKod = "")
+#   /tdl/v1/behandlare (with behandlingstypKod = "<ID from behandlingstyper call>")
+#   /tdl/v1/ledigaTider (with behandlareKod = "<ID from behandlare call>")
+#   /api/v1/logout
+
+### Login - get accessKod for particular therapist
+# @name login_particular_therapist
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Get Treatment Types (for particular therapist flow)
+# @name get_treatment_types_therapist
+POST {{baseUrl}}/tdl/v1/behandlingstyper
+Content-Type: application/json
+  
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_particular_therapist.response.body.accessKod}}",
+  "behandlareKod": ""
+}
+
+### Get Therapists
+# @name get_therapists
+POST {{baseUrl}}/tdl/v1/behandlare
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_particular_therapist.response.body.accessKod}}",
+  "behandlingstypKod": "{{get_treatment_types_therapist.response.body.behandlingstyper[0].kod}}"
+}
+
+### Free slots for particular therapist
+# @name freeSlots_therapist
+POST {{baseUrl}}/tdl/v1/ledigaTider
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_particular_therapist.response.body.accessKod}}",
+  "behandlareKod": "{{get_therapists.response.body.behandlare[0].kod}}",
+  "behandlingstypKod": "{{get_treatment_types_therapist.response.body.behandlingstyper[0].kod}}",
+  "datumStart": "2026-08-01",
+  "datumSlut": "2026-08-31"
+}
+
+### Logout (particular therapist flow)
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_particular_therapist.response.body.accessKod}}"
+}
+
