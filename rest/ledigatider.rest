@@ -47,8 +47,8 @@ Content-Type: application/json
   "accessKod": "{{login_all_therapists.response.body.accessKod}}",
   "behandlareKod": "",
   "behandlingstypKod": "{{get_treatment_types.response.body.behandlingstyper[0].kod}}",
-  "datumStart": "2026-08-01",
-  "datumSlut": "2026-08-31"
+  "datumStart": "2026-09-01",
+  "datumSlut": "2026-09-02"
 }
 
 ### Logout
@@ -123,8 +123,8 @@ Content-Type: application/json
   "accessKod": "{{login_particular_therapist.response.body.accessKod}}",
   "behandlareKod": "{{get_therapists.response.body.behandlare[0].kod}}",
   "behandlingstypKod": "{{get_treatment_types_therapist.response.body.behandlingstyper[0].kod}}",
-  "datumStart": "2026-08-01",
-  "datumSlut": "2026-08-31"
+  "datumStart": "2026-09-01",
+  "datumSlut": "2026-09-02"
 }
 
 ### Logout (particular therapist flow)
@@ -191,8 +191,8 @@ Content-Type: application/json
   "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
   "behandlareKod": "",
   "behandlingstypKod": "{{get_treatment_types_contiguous.response.body.behandlingstyper[0].kod}}",
-  "datumStart": "2026-08-01",
-  "datumSlut": "2026-08-31"
+  "datumStart": "2026-09-01",
+  "datumSlut": "2026-09-02"
 }
 
 ### Free slots - Akut värk
@@ -206,8 +206,8 @@ Content-Type: application/json
   "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
   "behandlareKod": "",
   "behandlingstypKod": "{{get_treatment_types_contiguous.response.body.behandlingstyper[1].kod}}",
-  "datumStart": "2026-08-01",
-  "datumSlut": "2026-08-31"
+  "datumStart": "2026-09-01",
+  "datumSlut": "2026-09-02"
 }
 
 ### Free slots - Hygienistbehandling
@@ -221,8 +221,8 @@ Content-Type: application/json
   "accessKod": "{{login_contiguous_session.response.body.accessKod}}",
   "behandlareKod": "",
   "behandlingstypKod": "{{get_treatment_types_contiguous.response.body.behandlingstyper[2].kod}}",
-  "datumStart": "2026-08-01",
-  "datumSlut": "2026-08-31"
+  "datumStart": "2026-09-01",
+  "datumSlut": "2026-09-02"
 }
 
 ### Logout 
