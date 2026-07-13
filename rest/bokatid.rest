@@ -59,8 +59,8 @@ Content-Type: application/json
   "integratorKod": "{{integratorKod}}",
   "accessKod": "{{login.response.body.accessKod}}",
   "patientKod": "{{registerPatient.response.body.patientKod}}",
-  "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
-  "behandlingstypKod": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA",
+  "behandlareKod": "{{behandlareKod}}",
+  "behandlingstypKod": "{{behandlingstypKod}}",
   "tidStart": "2026-08-01 09:00:00",
   "anteckning": ""
 }
