@@ -6,7 +6,7 @@
 Logical: BehandlingstyperPayload
 Id: behandlingstyper-payload
 Title: "Behandlingstyper Payload (Extract Model)"
-Description: "Payload wrapper for treatment types returned from Almasoft behandlingstyper."
+Description: "Payload wrapper for procedures returned from Almasoft behandlingstyper."
 * ^status = #draft
 
-* behandlingstyper 1..* TreatmentType "List of available treatment types."
+* behandlingstyper 1..* Procedure "List of available procedures."
