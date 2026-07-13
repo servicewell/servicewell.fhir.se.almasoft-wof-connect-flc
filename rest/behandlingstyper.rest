@@ -5,6 +5,11 @@
 # 1. Login - Authenticate user with credentials
 # 2. Get Treatment Types - Retrieve available treatment types for a specific care provider
 # 3. Logout - Terminate the session
+#
+# Calls: 
+#   /api/v1/login 
+#   /tdl/v1/behandlingstyper (with behandlareKod = "") 
+#   /api/v1/logout
 
 ### Login - get accessKod
 # @name login
@@ -45,6 +50,12 @@ Content-Type: application/json
 # 3. Get Treatment Types - Retrieve treatment types for the selected therapist
 # 4. Logout - Terminate the session
 
+# Calls: 
+#   /api/v1/login 
+#   /tdl/v1/behandlare (with behandlingstypKod = "") 
+#   /tdl/v1/behandlingstyper (with behandlareKod = "<ID from behandlare call>") 
+#   /api/v1/logout 
+
 ### Login - get accessKod
 # @name login_therapist
 POST {{baseUrl}}/api/v1/login
@@ -55,7 +66,7 @@ Content-Type: application/json
   "integratorKod": "{{integratorKod}}",
   "integratorLosen": "{{integratorLosen}}"
 }
-
+  
 ### Get Therapists
 # @name get_therapists
 POST {{baseUrl}}/tdl/v1/behandlare
