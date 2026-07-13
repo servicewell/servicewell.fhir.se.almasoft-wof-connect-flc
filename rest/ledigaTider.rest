@@ -6,6 +6,7 @@
 # 2. Get all treatment types - Retrieve available treatment types independent of therapist
 # 3. Get available time slots - Retrieve available time slots independent of therapist
 # 4. Logout - Terminate the session
+#
 # Calls:
 #   /api/v1/login
 #   /tdl/v1/behandlingstyper (with behandlareKod = "")
@@ -68,6 +69,7 @@ Content-Type: application/json
 # 3. Get therapists - Retrieve available therapists for a specific treatment type
 # 4. Get available time slots - Retrieve available time slots for a specific therapist
 # 5. Logout - Terminate the session
+#
 # Calls:
 #   /api/v1/login
 #   /tdl/v1/behandlingstyper (with behandlareKod = "")

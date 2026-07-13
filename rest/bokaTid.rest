@@ -1,0 +1,176 @@
+@baseUrl = https://etand.se:16443
+@testClinic = 9002
+
+### Make a reservation
+# 1. Login - Authenticate user with credentials
+# 2. Register patient - Register a new patient in the system
+# 3. Book an appointment - Book an appointment for the registered patient with a specific therapist and treatment type
+# 4. Logout - Terminate the session
+#
+# Calls: 
+#   /api/v1/login
+#   /tdl/v1/registreraPatient
+#   /tdl/v1/bokaTid
+#   /api/v1/logout 
+#
+# Notes: 
+# - When booking an appointment, either the patient's email or the patient's mobile number must be specified (it is also possible that both are filled in). 
+# - If the patient is not in the database, it is added. 
+# - If the patient is in the database but not in the clinic, it is linked to the clinic. 
+# - If the patient is already in the database for the clinic, nothing happens. 
+# - Several clinics can share the same server and the same database. This is for example to save money or to share a reception. 
+
+### Login - get accessKod
+# @name login
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Register patient
+# @name registerPatient
+POST {{baseUrl}}/tdl/v1/registreraPatient
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login.response.body.accessKod}}",
+  "personnr": "190101010106",
+  "fnamn": "Test",
+  "enamn": "Testsson",
+  "email": "test@example.com",
+  "mobil": ""
+}
+
+### Book appointment
+POST {{baseUrl}}/tdl/v1/bokaTid
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login.response.body.accessKod}}",
+  "patientKod": "{{registerPatient.response.body.patientKod}}",
+  "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+  "behandlingstypKod": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA",
+  "tidStart": "2026-08-01 09:00:00",
+  "anteckning": ""
+}
+
+### Logout
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login.response.body.accessKod}}"
+}
+
+### Book an appointment with a cohesive session 
+#
+# Calls: 
+#   /api/v1/login
+#   /tdl/v1/behandlingstyper
+#   /tdl/v1/behandlare
+#   /tdl/v1/ledigaTider
+#   /tdl/v1/registreraPatient
+#   /tdl/v1/bokaTid
+#   /api/v1/logout
+
+### Login
+# @name loginSession
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Get treatment types
+# @name behandlingstyper
+POST {{baseUrl}}/tdl/v1/behandlingstyper
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{loginSession.response.body.accessKod}}",
+  "behandlareKod": ""
+}
+
+### Get therapists
+# @name behandlare
+POST {{baseUrl}}/tdl/v1/behandlare
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{loginSession.response.body.accessKod}}",
+  "behandlingstypKod": "{{behandlingstyper.response.body.behandlingstyper[0].kod}}"
+}
+
+### Get available times
+# @name ledigaTider
+POST {{baseUrl}}/tdl/v1/ledigaTider
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{loginSession.response.body.accessKod}}",
+  "behandlareKod": "{{behandlare.response.body.behandlare[0].kod}}",
+  "behandlingstypKod": "{{behandlingstyper.response.body.behandlingstyper[0].kod}}",
+  "datumStart": "2026-08-01",
+  "datumSlut": "2026-08-31"
+}
+
+### Register patient
+# @name registerPatientSession
+POST {{baseUrl}}/tdl/v1/registreraPatient
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{loginSession.response.body.accessKod}}",
+  "personnr": "190101010107",
+  "fnamn": "Test",
+  "enamn": "Testsson",
+  "email": "test2@example.com",
+  "mobil": ""
+}
+
+### Book appointment
+POST {{baseUrl}}/tdl/v1/bokaTid
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{loginSession.response.body.accessKod}}",
+  "patientKod": "{{registerPatientSession.response.body.patientKod}}",
+  "behandlareKod": "{{behandlare.response.body.behandlare[0].kod}}",
+  "behandlingstypKod": "{{behandlingstyper.response.body.behandlingstyper[0].kod}}",
+  "tidStart": "{{ledigaTider.response.body.behandlareTider[0].ledigaTider[0].tidStart}}",
+  "anteckning": ""
+}
+
+### Logout (session)
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{loginSession.response.body.accessKod}}"
+}
+
