@@ -1,0 +1,14 @@
+@baseUrl = https://etand.se:16443
+
+### Ping - Communication Test
+POST {{baseUrl}}/adm/v1/ping
+Content-Type: application/json
+
+### Ping - Communication Test, with integrator credentials
+POST {{baseUrl}}/adm/v1/ping
+Content-Type: application/json
+
+{
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}

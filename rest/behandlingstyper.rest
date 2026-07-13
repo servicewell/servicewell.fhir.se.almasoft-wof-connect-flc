@@ -1,0 +1,90 @@
+@baseUrl = https://etand.se:16443
+@testClinic = 9002
+
+### Retrieve treatment types independent therapist 
+# 1. Login - Authenticate user with credentials
+# 2. Get Treatment Types - Retrieve available treatment types for a specific care provider
+# 3. Logout - Terminate the session
+
+### Login - get accessKod
+# @name login
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Get Treatment Types
+POST {{baseUrl}}/tdl/v1/behandlingstyper
+Content-Type: application/json
+  
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login.response.body.accessKod}}",
+  "behandlareKod": ""
+}
+
+### Logout
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login.response.body.accessKod}}"
+}
+
+
+### Get treatment types for a specific therapist
+# 1. Login - Authenticate user with credentials
+# 2. Get Therapists - Retrieve available therapists independent of treatment type
+# 3. Get Treatment Types - Retrieve treatment types for the selected therapist
+# 4. Logout - Terminate the session
+
+### Login - get accessKod
+# @name login_therapist
+POST {{baseUrl}}/api/v1/login
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "integratorLosen": "{{integratorLosen}}"
+}
+
+### Get Therapists
+# @name get_therapists
+POST {{baseUrl}}/tdl/v1/behandlare
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_therapist.response.body.accessKod}}",
+  "behandlingstypKod": ""
+}
+
+### Get Treatment Types for Specific Therapist
+POST {{baseUrl}}/tdl/v1/behandlingstyper
+Content-Type: application/json
+  
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_therapist.response.body.accessKod}}",
+  "behandlareKod": "{{get_therapists.response.body.behandlare[0].kod}}"
+}
+
+### Logout
+POST {{baseUrl}}/api/v1/logout
+Content-Type: application/json
+
+{
+  "almasoftKund": {{testClinic}},
+  "integratorKod": "{{integratorKod}}",
+  "accessKod": "{{login_therapist.response.body.accessKod}}"
+}
