@@ -20,6 +20,9 @@
 # - If the patient is already in the database for the clinic, nothing happens. 
 # - Several clinics can share the same server and the same database. This is for example to save money or to share a reception. 
 
+@behandlareKod= "A9620108-5C52-49A1-9E5C-8D2D73518740"
+@behandlingstypKod= "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA"
+
 ### Login - get accessKod
 # @name login
 POST {{baseUrl}}/api/v1/login
