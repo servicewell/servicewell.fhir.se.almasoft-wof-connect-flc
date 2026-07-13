@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "requestId": "2aa43d78-e35b-4e3f-9776-3e0c8a43133e",
+    "extractDate": "2026-07-13T15:13:00+02:00",
+    "sourceSystem": "almasoft",
+    "sourceSystemVersion": "",
+    "FhirQueryParam": [],
+    "resourceSubPath": "",
+    "interactionLevel": "instance"
+  },
+  "data": {
+    "tidbokningKod": "BF191E12-2770-4205-B48E-950402B441E1"
+  }
+}
