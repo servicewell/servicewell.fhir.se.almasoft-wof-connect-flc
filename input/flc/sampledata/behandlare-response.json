@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "requestId": "36f5aeff-6ffa-4e23-a1de-5f89fa2e5c97",
+    "extractDate": "2026-07-13T14:30:00+02:00",
+    "sourceSystem": "almasoft",
+    "sourceSystemVersion": "",
+    "FhirQueryParam": [],
+    "resourceSubPath": "",
+    "interactionLevel": "resource"
+  },
+  "data": {
+    "behandlare": [
+      {
+        "kod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+        "titel": "Tandläkare",
+        "namn": "Agda Hult"
+      }
+    ]
+  }
+}
