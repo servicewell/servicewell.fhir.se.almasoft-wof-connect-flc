@@ -4,9 +4,10 @@
 // ------------------------------------------------------------
 
 Logical: LedigaTiderPayload
+Parent: ExtractionBase
 Id: lediga-tider-payload
 Title: "LedigaTider Payload (Extract Model)"
 Description: "Payload wrapper for free time slots returned from Almasoft ledigaTider."
 * ^status = #draft
 
-* behandlareTider 1..* PractitionerFreeSlots "Free slots grouped per practitioner."
+* data.behandlareTider 1..* PractitionerFreeSlots "Free slots grouped per practitioner."

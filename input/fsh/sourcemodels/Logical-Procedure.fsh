@@ -11,3 +11,5 @@ Description: "Logical model for a bookable procedure returned from Almasoft beha
 
 * kod 1..1 string "Procedure code."
 * namn 0..1 string "Human-readable procedure name."
+* langd 0..1 integer "Procedure length in minutes."
+* isVideo 0..1 boolean "Whether the procedure is a video visit."

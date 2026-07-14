@@ -11,3 +11,4 @@ Description: "Logical model for a practitioner (behandlare) returned from Almaso
 
 * kod 1..1 string "Practitioner code (behandlareKod)."
 * namn 0..1 string "Practitioner display name."
+* titel 0..1 string "Practitioner title."

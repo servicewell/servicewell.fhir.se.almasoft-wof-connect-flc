@@ -4,11 +4,10 @@
 // ------------------------------------------------------------
 
 Logical: BokaTidPayload
+Parent: ExtractionBase
 Id: boka-tid-payload
 Title: "BokaTid Payload (Extract Model)"
 Description: "Payload wrapper for the booking confirmation response from Almasoft bokaTid."
 * ^status = #draft
 
-// Note: actual response fields to be confirmed from real API call.
-// Common pattern is a success flag or booking reference.
-* bokningId 0..1 string "Booking reference ID returned on success (if present)."
+* data.tidbokningKod 1..1 string "Booking code returned on successful booking."
