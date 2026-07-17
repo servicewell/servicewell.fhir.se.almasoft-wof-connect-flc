@@ -1,0 +1,87 @@
+{% comment %}
+Template: Almasoft LedigaTider
+Input: msg.meta + msg.data.behandlareTider[].ledigaTider[]
+Output: Appointment Bundle (searchset) for bookable slot candidates
+{% endcomment %}
+
+{% include "variables/canonicals" -%}
+
+{%- assign meta = msg.meta -%}
+{%- assign dataRoot = msg.data.postLedigaTider -%}
+{%- assign source_system = meta.sourceSystem | default: "none" -%}
+{%- assign extractDate = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
+{%- assign treaters = dataRoot.behandlareTider | to_array -%}
+
+{%- assign p_treatment_type_code = meta.FhirQueryParam | where: "name", "BehandlingstypKod" | first -%}
+{%- assign p_start = meta.FhirQueryParam | where: "name", "DatumStart" | first -%}
+{%- assign p_end = meta.FhirQueryParam | where: "name", "DatumSlut" | first -%}
+
+{
+	"resourceType": "Bundle",
+	"type": "searchset",
+	"id": "{{ meta.requestId }}",
+	"meta": {
+		"lastUpdated": "{{ extractDate }}",
+		"tag": [
+			{
+				"system": "https://canonical.fhir.link/fhir/CodeSystem/pms-system",
+				"code": "{{ source_system }}"
+			}
+		],
+		"profile": [ 
+      		"{{wof-connect-profile-booking-appointment-bundle-response}}" 
+    	]
+	},
+	"entry": [
+		{%- for treater in treaters -%}
+			{%- assign slots = treater.ledigaTider | to_array -%}
+			{%- for slot in slots -%}
+		{
+			"fullUrl": "urn:uuid:{{ treater.behandlareKod }}-{{ slot.tidStart | replace: ' ', '-' | replace: ':', '-' }}",
+			"resource": {
+				"resourceType": "Appointment",
+				"id": "{{ treater.behandlareKod }}-{{ slot.tidStart | replace: ' ', '-' | replace: ':', '-' }}",
+				"meta": {
+					"tag": [
+						{
+							"system": "{{ wof-connect-codesystem-pms-system }}",
+							"code": "{{ source_system }}"
+						}
+					],
+					"profile": [
+						"{{ wof-connect-profile-slot-appointment }}",
+						"{{ ihe-profile-appointment }}"
+					]
+				},
+				"status": "proposed",
+				"serviceType": [
+					{
+						"coding": [
+							{
+								"system": "{{ wof-connect-identifiercodesystem-service-type-id }}",
+								"code": "{{ p_treatment_type_code.value }}"
+							}
+						]
+					}
+				],
+				"start": "{{ slot.tidStart | replace: ' ', 'T' }}",
+				"requestedPeriod": [
+					{
+						"start": "{{ p_start.value }}",
+						"end": "{{ p_end.value }}"
+					}
+				],
+				"participant": [
+					{
+						"actor": {
+							"reference": "Practitioner/{{ treater.behandlareKod }}"
+						},
+						"status": "accepted"
+					}
+				]
+			}
+		}{%- unless forloop.last and forloop.parentloop.last -%},{%- endunless -%}
+			{%- endfor -%}
+		{%- endfor -%}
+	]
+}
