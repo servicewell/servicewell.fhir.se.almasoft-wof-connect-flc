@@ -24,6 +24,10 @@ Usage: #definition
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "LedigaTider.liquid"
 
+* content[+].id = "ig-loader-BokaTid.liquid"
+* content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BokaTid.liquid"
+
 // metadata
 * content[+].id = "ig-loader-metadata.json"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"

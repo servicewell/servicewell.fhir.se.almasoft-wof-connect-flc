@@ -1,14 +1,37 @@
 {
   "meta": {
-    "requestId": "75b12334-ab48-48af-be42-4de07c17878d",
-    "extractDate": "2026-07-13T15:11:00+02:00",
-    "sourceSystem": "almasoft",
-    "sourceSystemVersion": "",
-    "FhirQueryParam": [],
+    "requestId": "6ddb60c2-2fb7-41a1-bcd0-5767f10484c6",
+    "extractDate": "2026-07-20T08:08:37Z",
+    "sourceSystem": "alma",
+    "sourceSystemVersion": "1.0.0",
+    "FhirQueryParam": [
+      {
+        "name": "BehandlingstypKod",
+        "value": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA"
+      },
+      {
+        "name": "BehandlareKod",
+        "value": "A9620108-5C52-49A1-9E5C-8D2D73518740"
+      },
+      {
+        "name": "PeriodStart",
+        "value": "2026-07-27"
+      },
+      {
+        "name": "PeriodSlut",
+        "value": "2026-07-27"
+      },
+      {
+        "name": "Start",
+        "value": "2026-07-27T08:30:00\u002B02:00"
+      }
+    ],
     "resourceSubPath": "",
-    "interactionLevel": "instance"
+    "interactionLevel": "resource"
   },
   "data": {
-    "tidbokningKod": "BF191E12-2770-4205-B48E-950402B441E1"
+    "postBokaTid": {
+      "tidbokningKod": "5F87E56B-26F3-4399-8530-92836D7BFE11"
+    }
   }
 }
