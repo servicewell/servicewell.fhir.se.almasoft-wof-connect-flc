@@ -1,14 +1,21 @@
 {
   "meta": {
-    "requestId": "2aa43d78-e35b-4e3f-9776-3e0c8a43133e",
-    "extractDate": "2026-07-13T15:13:00+02:00",
-    "sourceSystem": "almasoft",
-    "sourceSystemVersion": "",
-    "FhirQueryParam": [],
+    "requestId": "e15ec5fa-d323-4e1c-b2b7-f8455c0299c6",
+    "extractDate": "2026-07-21T10:37:14Z",
+    "sourceSystem": "alma",
+    "sourceSystemVersion": "1.0.0",
+    "FhirQueryParam": [
+      {
+        "name": "TidbokningKod",
+        "value": "502421B2-4791-48E9-8D51-94ECD59D3202"
+      }
+    ],
     "resourceSubPath": "",
-    "interactionLevel": "instance"
+    "interactionLevel": "resource"
   },
   "data": {
-    "tidbokningKod": "BF191E12-2770-4205-B48E-950402B441E1"
+    "postAvbokaTid": {
+      "tidbokningKod": "502421B2-4791-48E9-8D51-94ECD59D3202"
+    }
   }
 }

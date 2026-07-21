@@ -1,0 +1,61 @@
+{% comment %}
+Template: Almasoft AvbokaTid
+Input: msg.meta + msg.data.postAvbokaTid.tidbokningKod
+Output: Appointment Bundle with cancelled Appointment
+{% endcomment %}
+
+{% include "variables/canonicals" -%}
+
+{%- assign meta = msg.meta -%}
+{%- assign data = msg.data.postAvbokaTid -%}
+{%- assign source_system = meta.sourceSystem | default: "none" -%}
+{%- assign last_updated = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
+
+{%- assign p_booking_code = meta.FhirQueryParam | where: "name", "TidbokningKod" | first -%}
+
+{
+	"resourceType": "Bundle",
+	"type": "searchset",
+	"id": "{{ meta.requestId }}",
+	"total": 1,
+	"meta": {
+		"lastUpdated": "{{ last_updated }}",
+		"tag": [
+			{
+				"system": "{{wof-connect-codesystem-pms-system}}",
+				"code": "{{ source_system }}"
+			}
+		],
+		"profile": [ 
+			"{{ ihe-sched-avail-bundle }}" 
+		]
+	},
+	"entry": [
+		{
+			"fullUrl": "urn:uuid:{{ data.tidbokningKod }}",
+			"resource": {
+				"resourceType": "Appointment",
+				"id": "{{ data.tidbokningKod }}",
+				"meta": {
+					"tag": [
+						{
+							"system": "{{ wof-connect-codesystem-pms-system }}",
+							"code": "{{ source_system }}"
+						}
+					],
+					"profile": [
+						"{{ wof-connect-profile-booking-appointment }}",
+						"{{ ihe-profile-appointment }}"
+					]
+				},
+				"identifier": [
+					{
+					"system": "{{ wof-connect-codesystem-identifier-slotid }}",
+					"value": "{{ data.tidbokningKod }}"
+					}
+				],
+				"status": "cancelled"
+			}
+		}
+	]
+}

@@ -52,6 +52,12 @@ Output: Appointment Bundle with booked Appointment
 						"{{ ihe-profile-appointment }}"
 					]
 				},
+				"identifier": [
+					{
+					"system": "{{ wof-connect-codesystem-identifier-slotid }}",
+					"value": "{{ data.tidbokningKod }}"
+					}
+				],
 				"status": "booked",
 				"serviceType": [
 					{

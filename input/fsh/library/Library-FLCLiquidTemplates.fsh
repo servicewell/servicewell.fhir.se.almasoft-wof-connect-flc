@@ -28,6 +28,10 @@ Usage: #definition
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BokaTid.liquid"
 
+* content[+].id = "ig-loader-AvbokaTid.liquid"
+* content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "AvbokaTid.liquid"
+
 // metadata
 * content[+].id = "ig-loader-metadata.json"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
