@@ -1,0 +1,94 @@
+{% comment %}
+Template: Almasoft Behandlare
+Input: msg.meta + msg.data.behandlare[]
+Output: Practitioner Bundle (resource) or single Practitioner (instance)
+{% endcomment %}
+
+{%- assign meta = msg.meta -%}
+{%- assign practitioners = msg.data.behandlare | to_array -%}
+{%- assign interaction_level = meta.interactionLevel | downcase -%}
+{%- assign source_system = meta.sourceSystem | default: "almasoft" -%}
+{%- assign last_updated = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
+
+{%- if interaction_level == 'instance' -%}
+{%- assign p = practitioners.first -%}
+{
+	"resourceType": "Practitioner",
+	"id": "{{ p.kod }}",
+	"identifier": [
+		{
+			"system": "urn:almasoft:behandlare-kod",
+			"value": "{{ p.kod }}"
+		}
+	],
+	"name": [
+		{
+			"text": "{{ p.namn }}"
+		}
+	],
+	"qualification": [
+		{
+			"code": {
+				"text": "{{ p.titel }}"
+			}
+		}
+	],
+	"meta": {
+		"lastUpdated": "{{ last_updated }}",
+		"tag": [
+			{
+				"system": "https://canonical.fhir.link/fhir/CodeSystem/pms-system",
+				"code": "{{ source_system }}"
+			}
+		]
+	}
+}
+{%- else -%}
+{
+	"resourceType": "Bundle",
+	"type": "searchset",
+	"id": "{{ meta.requestId }}",
+	"total": {{ practitioners.size }},
+	"meta": {
+		"lastUpdated": "{{ last_updated }}",
+		"tag": [
+			{
+				"system": "https://canonical.fhir.link/fhir/CodeSystem/pms-system",
+				"code": "{{ source_system }}"
+			}
+		]
+	},
+	"entry": [
+		{%- for p in practitioners -%}
+		{
+			"fullUrl": "urn:uuid:{{ p.kod }}",
+			"resource": {
+				"resourceType": "Practitioner",
+				"id": "{{ p.kod }}",
+				"identifier": [
+					{
+						"system": "urn:almasoft:behandlare-kod",
+						"value": "{{ p.kod }}"
+					}
+				],
+				"name": [
+					{
+						"text": "{{ p.namn }}"
+					}
+				],
+				"qualification": [
+					{
+						"code": {
+							"text": "{{ p.titel }}"
+						}
+					}
+				],
+				"meta": {
+					"lastUpdated": "{{ last_updated }}"
+				}
+			}
+		}{%- unless forloop.last -%},{%- endunless -%}
+		{%- endfor -%}
+	]
+}
+{%- endif -%}

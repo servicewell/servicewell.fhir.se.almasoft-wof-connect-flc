@@ -1,0 +1,40 @@
+{% comment %}
+Template: Almasoft RegistreraPatient
+Input: msg.meta + msg.data.patientKod/patientNr/patientStatus
+Output: Patient (instance)
+{% endcomment %}
+
+{%- assign meta = msg.meta -%}
+{%- assign data = msg.data -%}
+{%- assign source_system = meta.sourceSystem | default: "almasoft" -%}
+{%- assign last_updated = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
+
+{
+	"resourceType": "Patient",
+	"id": "{{ data.patientKod }}",
+	"identifier": [
+		{
+			"system": "urn:almasoft:patient-kod",
+			"value": "{{ data.patientKod }}"
+		},
+		{
+			"system": "urn:almasoft:patient-nr",
+			"value": "{{ data.patientNr }}"
+		}
+	],
+	"extension": [
+		{
+			"url": "https://canonical.fhir.link/fhir/StructureDefinition/almasoft-patient-status",
+			"valueString": "{{ data.patientStatus }}"
+		}
+	],
+	"meta": {
+		"lastUpdated": "{{ last_updated }}",
+		"tag": [
+			{
+				"system": "https://canonical.fhir.link/fhir/CodeSystem/pms-system",
+				"code": "{{ source_system }}"
+			}
+		]
+	}
+}

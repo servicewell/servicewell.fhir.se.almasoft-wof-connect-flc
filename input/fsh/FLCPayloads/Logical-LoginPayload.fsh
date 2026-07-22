@@ -4,9 +4,11 @@
 // ------------------------------------------------------------
 
 Logical: LoginPayload
+Parent: ExtractionBase
 Id: login-payload
 Title: "Login Payload (Extract Model)"
 Description: "Payload wrapper for the login response from Almasoft. Returns an accessKod valid for 1 hour."
 * ^status = #draft
 
-* accessKod 1..1 string "Session access code returned on successful login. Valid for 1 hour."
+* data.accessKod 1..1 string "Session access code returned on successful login. Valid for 1 hour."
+* data.loginTid 0..1 string "Server timestamp when login was processed."
