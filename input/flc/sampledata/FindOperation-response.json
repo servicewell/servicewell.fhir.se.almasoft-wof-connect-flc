@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "requestId": "864e7544-b1dc-4857-9bac-73af306da72f",
+    "extractDate": "2026-07-22T06:48:48Z",
+    "sourceSystem": "alma",
+    "sourceSystemVersion": "1.0.0",
+    "FhirQueryParam": [
+      {
+        "name": "BehandlingstypKod",
+        "value": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA"
+      },
+      {
+        "name": "DatumStart",
+        "value": "2026-07-27"
+      },
+      {
+        "name": "DatumSlut",
+        "value": "2026-07-27"
+      }
+    ],
+    "resourceSubPath": "",
+    "interactionLevel": "resource"
+  },
+  "data": {
+    "findOperation": {
+      "behandlareTider": [
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-27 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 07:30:00"
+            },
+            {
+              "tidStart": "2026-07-27 08:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 08:30:00"
+            },
+            {
+              "tidStart": "2026-07-27 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 10:30:00"
+            },
+            {
+              "tidStart": "2026-07-27 11:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 11:30:00"
+            },
+            {
+              "tidStart": "2026-07-27 13:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 13:30:00"
+            },
+            {
+              "tidStart": "2026-07-27 14:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 14:30:00"
+            },
+            {
+              "tidStart": "2026-07-27 15:00:00"
+            },
+            {
+              "tidStart": "2026-07-27 15:30:00"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
