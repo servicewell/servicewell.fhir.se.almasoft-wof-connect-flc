@@ -4,12 +4,7 @@
     "extractDate": "2026-07-21T10:37:14Z",
     "sourceSystem": "alma",
     "sourceSystemVersion": "1.0.0",
-    "FhirQueryParam": [
-      {
-        "name": "TidbokningKod",
-        "value": "502421B2-4791-48E9-8D51-94ECD59D3202"
-      }
-    ],
+    "FhirQueryParam": [],
     "resourceSubPath": "",
     "interactionLevel": "resource"
   },

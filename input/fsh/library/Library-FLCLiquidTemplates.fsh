@@ -20,17 +20,15 @@ Usage: #definition
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates/variables"
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "_canonicals.liquid"
 
+//  ******************  templates *************************
+
 * content[+].id = "ig-loader-LedigaTider.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "LedigaTider.liquid"
 
-* content[+].id = "ig-loader-BokaTid.liquid"
+* content[+].id = "ig-loader-BookOperation.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
-* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BokaTid.liquid"
-
-* content[+].id = "ig-loader-AvbokaTid.liquid"
-* content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
-* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "AvbokaTid.liquid"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BookOperation.liquid"
 
 // metadata
 * content[+].id = "ig-loader-metadata.json"
