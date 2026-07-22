@@ -21,10 +21,9 @@ Usage: #definition
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "_canonicals.liquid"
 
 //  ******************  templates *************************
-
-* content[+].id = "ig-loader-LedigaTider.liquid"
+* content[+].id = "ig-loader-FindOperation.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
-* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "LedigaTider.liquid"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "FindOperation.liquid"
 
 * content[+].id = "ig-loader-BookOperation.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
