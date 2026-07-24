@@ -49,7 +49,6 @@ API:
 			{%- assign slots = treater.ledigaTider | to_array -%}
 			{%- for slot in slots -%}
 		{
-			"fullUrl": "urn:uuid:{{ treater.behandlareKod }}-{{ slot.tidStart | replace: ' ', '-' | replace: ':', '-' }}",
 			"resource": {
 				"resourceType": "Appointment",
 				"id": "{{ treater.behandlareKod }}-{{ slot.tidStart | replace: ' ', '-' | replace: ':', '-' }}",

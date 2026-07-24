@@ -29,6 +29,10 @@ Usage: #definition
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BookOperation.liquid"
 
+* content[+].id = "ig-loader-ScheduleContextOp.liquid"
+* content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "ScheduleContextOp.liquid"
+
 // metadata
 * content[+].id = "ig-loader-metadata.json"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"

@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "requestId": "c490e269-9383-4db9-8e70-9d2612a79f51",
+    "extractDate": "2026-07-24T13:32:54Z",
+    "sourceSystem": "alma",
+    "sourceSystemVersion": "1.0.0",
+    "FhirQueryParam": [],
+    "resourceSubPath": "",
+    "interactionLevel": "resource"
+  },
+  "data": {
+    "scheduleContextOp": {
+      "behandlare": [
+        {
+          "kod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "titel": "Tandl\u00E4kare",
+          "namn": "Agda Hult"
+        }
+      ],
+      "behandlingstyper": [
+        {
+          "kod": "0BCE6179-1A2C-48FA-A948-0B8C572DF445",
+          "namn": "Akut fraktur",
+          "langd": 20
+        },
+        {
+          "kod": "5A840F76-0797-4F6E-9327-BADECEDF9446",
+          "namn": "Akut v\u00E4rk",
+          "langd": 30
+        },
+        {
+          "kod": "6277F12F-B5FA-4FCA-8403-E4FCE493179D",
+          "namn": "Hygienistbehandling",
+          "langd": 40
+        },
+        {
+          "kod": "6C5DAE83-F1B1-4499-BC26-FE6FA643AC06",
+          "namn": "Hygienistbehandling 60",
+          "langd": 60
+        },
+        {
+          "kod": "8330B74C-BEE1-488C-95A1-5B15B2C542F6",
+          "namn": "Konsultation",
+          "langd": 30
+        },
+        {
+          "kod": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA",
+          "namn": "Unders\u00F6kning",
+          "langd": 30
+        },
+        {
+          "kod": "D075E9A4-8140-4065-AD08-6C8D27BE8A05",
+          "namn": "Unders\u00F6kning Ny patient",
+          "langd": 40
+        }
+      ],
+      "behandlareBehandlingstyper": [
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "behandlingstyper": [
+            "0BCE6179-1A2C-48FA-A948-0B8C572DF445",
+            "5A840F76-0797-4F6E-9327-BADECEDF9446",
+            "6277F12F-B5FA-4FCA-8403-E4FCE493179D",
+            "6C5DAE83-F1B1-4499-BC26-FE6FA643AC06",
+            "8330B74C-BEE1-488C-95A1-5B15B2C542F6",
+            "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA",
+            "D075E9A4-8140-4065-AD08-6C8D27BE8A05"
+          ]
+        }
+      ],
+      "behandlareTider": [
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:40:00"
+            }
+          ],
+          "behandlingstypKod": "0BCE6179-1A2C-48FA-A948-0B8C572DF445"
+        },
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:30:00"
+            }
+          ],
+          "behandlingstypKod": "5A840F76-0797-4F6E-9327-BADECEDF9446"
+        },
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            }
+          ],
+          "behandlingstypKod": "6277F12F-B5FA-4FCA-8403-E4FCE493179D"
+        },
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            }
+          ],
+          "behandlingstypKod": "6C5DAE83-F1B1-4499-BC26-FE6FA643AC06"
+        },
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:30:00"
+            }
+          ],
+          "behandlingstypKod": "8330B74C-BEE1-488C-95A1-5B15B2C542F6"
+        },
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:30:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:30:00"
+            }
+          ],
+          "behandlingstypKod": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA"
+        },
+        {
+          "behandlareKod": "A9620108-5C52-49A1-9E5C-8D2D73518740",
+          "ledigaTider": [
+            {
+              "tidStart": "2026-07-25 07:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 07:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 08:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 09:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:00:00"
+            },
+            {
+              "tidStart": "2026-07-25 10:40:00"
+            },
+            {
+              "tidStart": "2026-07-25 11:20:00"
+            },
+            {
+              "tidStart": "2026-07-25 12:00:00"
+            }
+          ],
+          "behandlingstypKod": "D075E9A4-8140-4065-AD08-6C8D27BE8A05"
+        }
+      ]
+    }
+  }
+}
