@@ -215,10 +215,12 @@ API:
 						},
 						"actor": [
 							{
-								"reference": "PractitionerRole/{{ role_id }}"
+								"reference": "PractitionerRole/{{ role_id }}",
+								"display": "{{ practitioner_name }}"
 							},
 							{
-								"reference": "ActivityDefinition/{{ treatment_code }}"
+								"reference": "ActivityDefinition/{{ treatment_code }}",
+								"display": "{{ treatment_name }}"
 							}
 						],
 						"planningHorizon": {
