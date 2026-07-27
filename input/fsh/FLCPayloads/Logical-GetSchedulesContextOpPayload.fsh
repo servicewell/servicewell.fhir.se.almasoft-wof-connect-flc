@@ -13,8 +13,10 @@ Title: "GetSchedulesContextOp Payload (Extract Model)"
 Description: "Payload wrapper for the schedule context operation response from Almasoft booking operations."
 * ^status = #draft
 
-// TODO: need fixing
-* data.behandlare 1..* Practitioner "List of practitioners."
-* data.behandlingstyper 1..* Procedure "List of procedures."
-//* data.behandlareBehandlingstyper 1..* PractitionerFreeSlots "Free slots grouped per practitioner."
-* data.behandlareTider 1..* PractitionerFreeSlots "Free slots grouped per practitioner."
+* data.getSchedulesContextOp 1..1 BackboneElement "Appointment find operation result."
+* data.getSchedulesContextOp.behandlare 0..* Practitioner "List of practitioners."
+* data.getSchedulesContextOp.behandlingstyper 0..* Procedure "List of procedures."
+* data.getSchedulesContextOp.behandlareBehandlingstyper 0..* BackboneElement "Mapping between practitioner code and supported procedure codes."
+* data.getSchedulesContextOp.behandlareBehandlingstyper.behandlareKod 1..1 string "Practitioner code."
+* data.getSchedulesContextOp.behandlareBehandlingstyper.behandlingstyper 0..* string "Procedure codes this practitioner can perform."
+* data.getSchedulesContextOp.behandlareTider 0..* PractitionerFreeSlots "Free slots grouped per practitioner."
