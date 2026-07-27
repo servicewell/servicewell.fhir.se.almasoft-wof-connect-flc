@@ -39,4 +39,4 @@ Usage: #definition
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackage].valueString = "servicewell.fhir.almasoft-wof-connect-flc"
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackageVersion].valueString = "0.1.0"
 * group.rule.target.extension[FhirLiquidMap].extension[flcLibrary].valueCanonical = Canonical(FLCLiquidTemplates)
-* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "GetchedulesContextOp.liquid"
+* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "GetSchedulesContextOp.liquid"
