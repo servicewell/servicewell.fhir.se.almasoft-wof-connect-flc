@@ -1,10 +1,10 @@
-Instance: flc-findoperation
+Instance: flc-findop
 InstanceOf: FLCStructureMap
 Usage: #definition
-* name = "flc-findoperation"
-* id = "flc-findoperation"
+* name = "flc-findop"
+* id = "flc-findop"
 * version = "0.1.0"
-* title = "FLC FindOperation"
+* title = "FLC Find Operation"
 * status = #draft
 * experimental = true
 * date = "2026-07-14"
@@ -14,7 +14,7 @@ Usage: #definition
 * jurisdiction = urn:iso:std:iso:3166#001 "World"
 
 // Source = payload model
-* structure[+].url = Canonical(find-operation-payload)
+* structure[+].url = Canonical(find-op-payload)
 * structure[=].mode = #source
 
 // Target = WOF Connect Appointment Find profile
@@ -24,7 +24,7 @@ Usage: #definition
 * group.name = "LiquidTransform"
 * group.typeMode = #none
 * group.documentation = "Almasoft find operation to FHIR via Liquid template."
-* group.input.name = "FindOperationPayload"
+* group.input.name = "FindOpPayload"
 * group.input.type = "FlcPayload"
 * group.input.mode = #source
 
@@ -39,4 +39,4 @@ Usage: #definition
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackage].valueString = "servicewell.fhir.almasoft-wof-connect-flc"
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackageVersion].valueString = "0.1.0"
 * group.rule.target.extension[FhirLiquidMap].extension[flcLibrary].valueCanonical = Canonical(FLCLiquidTemplates)
-* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "FindOperation.liquid"
+* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "FindOp.liquid"

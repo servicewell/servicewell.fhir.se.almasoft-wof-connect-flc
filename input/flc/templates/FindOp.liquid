@@ -1,13 +1,13 @@
 {% comment %}
 ==========================================================================
-Template:	Almasoft FindOperation
+Template:	Almasoft FindOp
 Purpose:	Generates a FHIR Bundle resource with bookable slot candidates (Appointments).
 Version:	0.0.1
 Author:		Service Well
 Date:		2026-07-21
 
 Input: 
-	msg.meta + msg.data.findOperation.behandlareTider[].ledigaTider[]
+	msg.meta + msg.data.findOp.behandlareTider[].ledigaTider[]
 Output: 
 	Appointment Bundle (searchset) with Appointments
 
@@ -19,7 +19,7 @@ API:
 {% include "variables/canonicals" -%}
 
 {%- assign meta = msg.meta -%}
-{%- assign data = msg.data.findOperation -%}
+{%- assign data = msg.data.findOp -%}
 {%- assign source_system = meta.sourceSystem | default: "none" -%}
 {%- assign extractDate = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
 {%- assign treaters = data.behandlareTider | to_array -%}

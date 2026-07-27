@@ -1,30 +1,30 @@
-Instance: flc-bookoperation
+Instance: flc-getschedulescontextop
 InstanceOf: FLCStructureMap
 Usage: #definition
-* name = "flc-bookoperation"
-* id = "flc-bookoperation"
+* name = "flc-getschedulescontextop"
+* id = "flc-getschedulescontextop"
 * version = "0.1.0"
-* title = "FLC BookOperation"
+* title = "FLC GetSchedulesContextOp Operation"
 * status = #draft
 * experimental = true
 * date = "2026-07-14"
 * publisher = "Service Well AB"
 * contact.name = "Service Well AB"
-* description = "StructureMap for transforming BokaTid response from /tdl/v1/bokaTid or /tdl/v1/avbokaTid."
+* description = "StructureMap for transforming GetSchedulesContextOp response from /tdl/v1/behandlare, /tdl/v1/behandlingstyper and /tdl/v1/ledigaTider."
 * jurisdiction = urn:iso:std:iso:3166#001 "World"
 
 // Source = payload model
-* structure[+].url = Canonical(book-operation-payload)
+* structure[+].url = Canonical(get-schedules-context-op-payload)
 * structure[=].mode = #source
 
 // Target = IHE Appointment bundle profile
-* structure[+].url = Canonical(ihe-sched-avail-bundle)
+* structure[+].url = Canonical(wof-connect-schedule-context-operation-response)
 * structure[=].mode = #target
 
 * group.name = "LiquidTransform"
 * group.typeMode = #none
-* group.documentation = "Almasoft book operation to FHIR via Liquid template."
-* group.input.name = "BookOperationPayload"
+* group.documentation = "Almasoft schedule context operation to FHIR via Liquid template."
+* group.input.name = "GetSchedulesContextOpPayload"
 * group.input.type = "FlcPayload"
 * group.input.mode = #source
 
@@ -39,4 +39,4 @@ Usage: #definition
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackage].valueString = "servicewell.fhir.almasoft-wof-connect-flc"
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackageVersion].valueString = "0.1.0"
 * group.rule.target.extension[FhirLiquidMap].extension[flcLibrary].valueCanonical = Canonical(FLCLiquidTemplates)
-* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "BookOperation.liquid"
+* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "GetchedulesContextOp.liquid"

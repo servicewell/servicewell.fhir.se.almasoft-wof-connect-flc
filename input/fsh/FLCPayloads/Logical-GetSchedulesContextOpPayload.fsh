@@ -1,15 +1,15 @@
 // ------------------------------------------------------------
-// Payload Model: ScheduleContextOpPayload
+// Payload Model: GetSchedulesContextOpPayload
 // API: 
 //  POST /tdl/v1/behandlare
 //  POST /tdl/v1/behandlingstyper	
 //  POST /tdl/v1/ledigaTider
 // ------------------------------------------------------------
 
-Logical: ScheduleContextOpPayload
+Logical: GetSchedulesContextOpPayload
 Parent: ExtractionBase
-Id: schedule-context-op-payload
-Title: "ScheduleContextOp Payload (Extract Model)"
+Id: get-schedules-context-op-payload
+Title: "GetSchedulesContextOp Payload (Extract Model)"
 Description: "Payload wrapper for the schedule context operation response from Almasoft booking operations."
 * ^status = #draft
 

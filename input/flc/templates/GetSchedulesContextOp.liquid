@@ -1,13 +1,13 @@
 {% comment %}
 ==========================================================================
-Template:	Almasoft ScheduleContextOp
+Template:	Almasoft GetSchedulesContextOp
 Purpose:	Generates a FHIR searchset Bundle with Organization, HealthcareService, ActivityDefinition, Schedule, Practitioner, PractitionerRole
 Version:	0.0.1
 Author:		Service Well
 Date:		2026-07-23
 
 Input: 
-	msg.meta + msg.data.scheduleContextOp.behandlareTider
+	msg.meta + msg.data.getSchedulesContextOp.behandlareTider
 
 Output:
   - FHIR Bundle resource with:
@@ -28,7 +28,7 @@ API:
 {% include "variables/canonicals" -%}
 
 {%- assign meta = msg.meta -%}
-{%- assign data = msg.data.scheduleContextOp -%}
+{%- assign data = msg.data.getSchedulesContextOp -%}
 {%- assign source_system = meta.sourceSystem | default: "none" -%}
 {%- assign extractDate = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
 {%- assign treaters = data.behandlareTider | to_array -%}

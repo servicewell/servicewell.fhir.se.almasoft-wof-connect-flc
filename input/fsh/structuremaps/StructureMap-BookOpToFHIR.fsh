@@ -1,30 +1,30 @@
-Instance: flc-schedulecontextop
+Instance: flc-bookop
 InstanceOf: FLCStructureMap
 Usage: #definition
-* name = "flc-schedulecontextop"
-* id = "flc-schedulecontextop"
+* name = "flc-bookop"
+* id = "flc-bookop"
 * version = "0.1.0"
-* title = "FLC Schedule Context Operation"
+* title = "FLC Book Operation"
 * status = #draft
 * experimental = true
 * date = "2026-07-14"
 * publisher = "Service Well AB"
 * contact.name = "Service Well AB"
-* description = "StructureMap for transforming ScheduleContextOp response from /tdl/v1/behandlare, /tdl/v1/behandlingstyper and /tdl/v1/ledigaTider."
+* description = "StructureMap for transforming BokaTid response from /tdl/v1/bokaTid or /tdl/v1/avbokaTid."
 * jurisdiction = urn:iso:std:iso:3166#001 "World"
 
 // Source = payload model
-* structure[+].url = Canonical(schedule-context-op-payload)
+* structure[+].url = Canonical(book-op-payload)
 * structure[=].mode = #source
 
 // Target = IHE Appointment bundle profile
-* structure[+].url = Canonical(wof-connect-schedule-context-operation-response)
+* structure[+].url = Canonical(ihe-sched-avail-bundle)
 * structure[=].mode = #target
 
 * group.name = "LiquidTransform"
 * group.typeMode = #none
-* group.documentation = "Almasoft schedule context operation to FHIR via Liquid template."
-* group.input.name = "ScheduleContextOpPayload"
+* group.documentation = "Almasoft book operation to FHIR via Liquid template."
+* group.input.name = "BookOPayload"
 * group.input.type = "FlcPayload"
 * group.input.mode = #source
 
@@ -39,4 +39,4 @@ Usage: #definition
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackage].valueString = "servicewell.fhir.almasoft-wof-connect-flc"
 * group.rule.target.extension[FhirLiquidMap].extension[flcPackageVersion].valueString = "0.1.0"
 * group.rule.target.extension[FhirLiquidMap].extension[flcLibrary].valueCanonical = Canonical(FLCLiquidTemplates)
-* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "ScheduleContextOp.liquid"
+* group.rule.target.extension[FhirLiquidMap].extension[liquidTemplate].valueString = "BookOp.liquid"

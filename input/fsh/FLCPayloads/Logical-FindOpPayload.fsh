@@ -1,12 +1,12 @@
 // ------------------------------------------------------------
-// Payload Model: FindOperationPayload
+// Payload Model: FindOpPayload
 // API: POST /tdl/v1/ledigaTider
 // ------------------------------------------------------------
 
-Logical: FindOperationPayload
+Logical: FindOpPayload
 Parent: ExtractionBase
-Id: find-operation-payload
-Title: "FindOperation Payload (Extract Model)"
+Id: find-op-payload
+Title: "Find Operation Payload (Extract Model)"
 Description: "Payload wrapper for free time slots returned from Almasoft find operation."
 * ^status = #draft
 

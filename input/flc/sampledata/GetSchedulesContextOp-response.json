@@ -9,7 +9,7 @@
     "interactionLevel": "resource"
   },
   "data": {
-    "scheduleContextOp": {
+    "getSchedulesContextOp": {
       "behandlare": [
         {
           "kod": "A9620108-5C52-49A1-9E5C-8D2D73518740",

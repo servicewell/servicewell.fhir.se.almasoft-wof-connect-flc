@@ -1,7 +1,7 @@
 {
   "meta": {
-    "requestId": "25397a3f-e083-46cb-a1e4-9baabe8665e6",
-    "extractDate": "2026-07-22T05:33:43Z",
+    "requestId": "ac8affb1-2634-483a-b5cf-98cd37f7bf80",
+    "extractDate": "2026-07-22T05:33:08Z",
     "sourceSystem": "alma",
     "sourceSystemVersion": "1.0.0",
     "FhirQueryParam": [
@@ -27,14 +27,14 @@
       },
       {
         "name": "Status",
-        "value": "cancelled"
+        "value": "pending"
       }
     ],
     "resourceSubPath": "",
     "interactionLevel": "resource"
   },
   "data": {
-    "bookOperation": {
+    "bookOp": {
       "tidbokningKod": "93AC0FEF-007E-450C-8180-1CCC570B0ADD"
     }
   }

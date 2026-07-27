@@ -21,17 +21,17 @@ Usage: #definition
 * content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "_canonicals.liquid"
 
 //  ******************  templates *************************
-* content[+].id = "ig-loader-FindOperation.liquid"
+* content[+].id = "ig-loader-FindOp.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
-* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "FindOperation.liquid"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "FindOp.liquid"
 
-* content[+].id = "ig-loader-BookOperation.liquid"
+* content[+].id = "ig-loader-BookOp.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
-* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BookOperation.liquid"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "BookOp.liquid"
 
-* content[+].id = "ig-loader-ScheduleContextOp.liquid"
+* content[+].id = "ig-loader-GetSchedulesContextOp.liquid"
 * content[=].extension[attachment-folder-structure].extension[folder-path].valueString = "templates"
-* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "ScheduleContextOp.liquid"
+* content[=].extension[attachment-folder-structure].extension[logical-filename].valueString = "GetSchedulesContextOp.liquid"
 
 // metadata
 * content[+].id = "ig-loader-metadata.json"

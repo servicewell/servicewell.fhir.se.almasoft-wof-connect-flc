@@ -1,14 +1,14 @@
 // ------------------------------------------------------------
-// Payload Model: BookOperationPayload
+// Payload Model: BookOpPayload
 // API: 
 //  POST /tdl/v1/bokaTid
 //  POST /tdl/v1/avbokaTid
 // ------------------------------------------------------------
 
-Logical: BookOperationPayload
+Logical: BookOpPayload
 Parent: ExtractionBase
-Id: book-operation-payload
-Title: "BookOperation Payload (Extract Model)"
+Id: book-op-payload
+Title: "Book Operation Payload (Extract Model)"
 Description: "Payload wrapper for the booking confirmation response from Almasoft booking operations."
 * ^status = #draft
 
