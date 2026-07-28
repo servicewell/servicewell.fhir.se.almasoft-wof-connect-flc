@@ -12,5 +12,4 @@ Title: "Book Operation Payload (Extract Model)"
 Description: "Payload wrapper for the booking confirmation response from Almasoft booking operations."
 * ^status = #draft
 
-* data.bookOp 1..1 BackboneElement "Appointment book operation result."
-* data.bookOp.tidbokningKod 1..1 string "Booking code returned on successful booking or cancellation."
+* data.bookOp 1..1 BokaTidResponse "Appointment book operation result (same response for bokaTid and avbokaTid)."

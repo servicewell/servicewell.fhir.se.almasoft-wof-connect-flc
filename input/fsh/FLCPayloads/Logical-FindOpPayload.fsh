@@ -10,5 +10,4 @@ Title: "Find Operation Payload (Extract Model)"
 Description: "Payload wrapper for free time slots returned from Almasoft find operation."
 * ^status = #draft
 
-* data.findOp 1..1 BackboneElement "Appointment find operation result."
-* data.findOp.behandlareTider 0..* PractitionerFreeSlots "Free slots grouped per practitioner."
+* data.findOp 1..1 LedigaTiderResponse "Appointment find operation result."

@@ -1,12 +1,12 @@
 // ------------------------------------------------------------
-// Logical Model: Procedure
+// Logical Model: BehandlingstyperResponse
 // API: POST /tdl/v1/behandlingstyper
 // ------------------------------------------------------------
 
-Logical: Procedure
-Id: procedure
-Title: "Almasoft Procedure (Logical Model)"
-Description: "Logical model for a bookable procedure returned from Almasoft behandlingstyper."
+Logical: BehandlingstyperResponse
+Id: behandlingstyper-response
+Title: "Almasoft BehandlingstyperResponse (Logical Model)"
+Description: "Logical model for bookable procedures returned from Almasoft behandlingstyper."
 * ^status = #draft
 
 * kod 1..1 string "Procedure code."
