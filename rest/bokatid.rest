@@ -177,3 +177,17 @@ Content-Type: application/json
   "accessKod": "{{loginSession.response.body.accessKod}}"
 }
 
+
+
+# ### Cancel appointment
+# POST {{baseUrl}}/tdl/v1/avbokaTid
+# Content-Type: application/json
+
+# {
+#   "almasoftKund": {{testClinic}},
+#   "integratorKod": "{{integratorKod}}",
+#   "accessKod": "{{loginSession.response.body.accessKod}}",
+#   "patientKod": "{{registerPatientSession.response.body.patientKod}}",
+#   "tidbokningKod": "BF191E12-2770-4205-B48E-950402B441E1",
+#   "orsak": "Fått förhinder"
+# }
