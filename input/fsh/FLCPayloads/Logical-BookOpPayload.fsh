@@ -1,0 +1,15 @@
+// ------------------------------------------------------------
+// Payload Model: BookOpPayload
+// API: 
+//  POST /tdl/v1/bokaTid
+//  POST /tdl/v1/avbokaTid
+// ------------------------------------------------------------
+
+Logical: BookOpPayload
+Parent: ExtractionBase
+Id: book-op-payload
+Title: "Book Operation Payload (Extract Model)"
+Description: "Payload wrapper for the booking confirmation response from Almasoft booking operations."
+* ^status = #draft
+
+* data.bookOp 1..1 BokaTidResponse "Appointment book operation result (same response for bokaTid and avbokaTid)."

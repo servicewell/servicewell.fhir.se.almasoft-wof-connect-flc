@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "requestId": "ac8affb1-2634-483a-b5cf-98cd37f7bf80",
+    "extractDate": "2026-07-22T05:33:08Z",
+    "sourceSystem": "alma",
+    "sourceSystemVersion": "1.0.0",
+    "FhirQueryParam": [
+      {
+        "name": "BehandlingstypKod",
+        "value": "44D4E0B9-23B6-41EE-8097-BBBC8B01EAFA"
+      },
+      {
+        "name": "BehandlareKod",
+        "value": "A9620108-5C52-49A1-9E5C-8D2D73518740"
+      },
+      {
+        "name": "PeriodStart",
+        "value": "2026-07-27"
+      },
+      {
+        "name": "PeriodSlut",
+        "value": "2026-07-27"
+      },
+      {
+        "name": "Start",
+        "value": "2026-07-27T07:00:00\u002B02:00"
+      },
+      {
+        "name": "Status",
+        "value": "pending"
+      }
+    ],
+    "resourceSubPath": "",
+    "interactionLevel": "resource"
+  },
+  "data": {
+    "bookOp": {
+      "tidbokningKod": "93AC0FEF-007E-450C-8180-1CCC570B0ADD"
+    }
+  }
+}

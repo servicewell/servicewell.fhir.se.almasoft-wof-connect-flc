@@ -1,0 +1,237 @@
+{% comment %}
+==========================================================================
+Template:	Almasoft GetSchedulesContextOp
+Purpose:	Generates a FHIR searchset Bundle with Organization, HealthcareService, ActivityDefinition, Schedule, Practitioner, PractitionerRole
+Version:	0.0.1
+Author:		Service Well
+Date:		2026-07-23
+
+Input: 
+	msg.meta + msg.data.getSchedulesContextOp.behandlareTider
+
+Output:
+  - FHIR Bundle resource with:
+      - Schedules and the included context resources:
+        - Organization
+        - HealthcareService
+        - ActivityDefinition
+        - Practitioner
+        - PractitionerRole
+
+API:
+	/tdl/v1/behandlare
+	/tdl/v1/behandlingstyper	
+	/tdl/v1/ledigaTider
+
+{% endcomment %}
+
+{% include "variables/canonicals" -%}
+
+{%- assign meta = msg.meta -%}
+{%- assign data = msg.data.getSchedulesContextOp -%}
+{%- assign source_system = meta.sourceSystem | default: "none" -%}
+{%- assign extractDate = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
+{%- assign treaters = data.behandlareTider | to_array -%}
+
+{
+	"resourceType": "Bundle",
+	"type": "searchset",
+	"id": "{{ meta.requestId }}",
+	"meta": {
+		"lastUpdated": "{{ extractDate }}",
+		"tag": [
+			{
+				"system": "https://canonical.fhir.link/fhir/CodeSystem/pms-system",
+				"code": "{{ source_system }}"
+			}
+		],
+		"profile": [ 
+      		"{{wof-connect-profile-schedule-context-operation-response}}" 
+    	]
+	},
+	"entry": [
+		{%- assign first_entry = true -%}
+		{%- assign emitted_practitioners = "|" -%}
+		{%- assign emitted_treatment_types = "|" -%}
+		{%- assign emitted_schedules = "|" -%}
+		{%- assign emitted_roles = "|" -%}		
+
+		{%- for treater in treaters -%}
+			{%- assign treater_code = treater.behandlareKod | default: "unknown-practitioner" -%}
+			{%- assign treatment_code = treater.behandlingstypKod | default: "unknown-treatment" -%}
+			{%- assign slots = treater.ledigaTider | to_array -%}
+			{%- assign practitioner_data = data.behandlare | where: "kod", treater_code | first -%}
+			{%- assign practitioner_name = practitioner_data.namn | default: treater_code -%}
+			{%- assign practitioner_title = practitioner_data.titel | default: "Caregiver" -%}
+			{%- assign practitioner_given = practitioner_name | split: " " | first -%}
+			{%- assign practitioner_family = practitioner_name | split: " " | last -%}
+			{%- assign treatment_data = data.behandlingstyper | where: "kod", treatment_code | first -%}
+			{%- assign treatment_name = treatment_data.namn | default: treatment_code -%}
+			{%- assign treatment_duration = treatment_data.langd | default: 0 -%}
+			{%- assign role_id = treater_code -%}
+			{%- assign schedule_id = "schedule-" | append: treater_code | append: "-" | append: treatment_code -%}
+
+			{%- assign practitioner_key = "|" | append: treater_code | append: "|" -%}
+			{%- unless emitted_practitioners contains practitioner_key -%}
+				{%- unless first_entry -%},{%- endunless -%}
+				{
+					"resource": {
+						"resourceType": "Practitioner",
+						"id": "{{ treater_code }}",
+						"meta": {
+							"tag": [
+								{
+									"system": "{{ wof-connect-codesystem-pms-system }}",
+									"code": "{{ source_system }}"
+								}
+							],
+							"profile": [
+								"{{ wof-connect-profile-wof-connect-practitioner }}"
+							]
+						},
+						"identifier": [
+							{
+								"system": "urn:almasoft:behandlare-kod",
+								"value": "{{ treater_code }}"
+							}
+						],
+						"name": [
+							{
+								"text": "{{ practitioner_name }}",
+								"family": "{{ practitioner_family }}",
+								"given": [
+									"{{ practitioner_given }}"
+								],
+								"prefix": [
+									"{{ practitioner_title }}"
+								]
+							}
+						]
+					}
+				}
+				{%- assign first_entry = false -%}
+				{%- assign emitted_practitioners = emitted_practitioners | append: treater_code | append: "|" -%}
+			{%- endunless -%}
+
+			{%- assign role_key = "|" | append: role_id | append: "|" -%}
+			{%- unless emitted_roles contains role_key -%}
+				{%- unless first_entry -%},{%- endunless -%}
+				{
+					"resource": {
+						"resourceType": "PractitionerRole",
+						"id": "{{ role_id }}",
+						"meta": {
+							"tag": [
+								{
+									"system": "{{ wof-connect-codesystem-pms-system }}",
+									"code": "{{ source_system }}"
+								}
+							],
+							"profile": [
+								"{{ wof-connect-profile-practitionerrole }}"
+							]
+						},
+  						"active": true,
+						"practitioner": {
+							"reference": "Practitioner/{{ treater_code }}",
+	                    		"display": "{{ practitioner_name }}"
+						}
+					}
+				}
+				{%- assign first_entry = false -%}
+				{%- assign emitted_roles = emitted_roles | append: role_id | append: "|" -%}
+			{%- endunless -%}
+
+			{%- assign treatment_key = "|" | append: treatment_code | append: "|" -%}
+			{%- unless emitted_treatment_types contains treatment_key -%}
+				{%- unless first_entry -%},{%- endunless -%}
+				{
+					"resource": {
+						"resourceType": "ActivityDefinition",
+						"id": "{{ treatment_code }}",
+						"meta": {
+							"tag": [
+								{
+									"system": "{{ wof-connect-codesystem-pms-system }}",
+									"code": "{{ source_system }}"
+								}
+							],
+							"profile": [
+								"{{ wof-connect-profile-activitydefinition }}"
+							]
+						},
+						"code": {
+							"coding": [
+								{
+									"code": "{{ treatment_code }}",
+									"system": "{{ wof-connect-identifiercodesystem-service-type-id }}",
+	                            		"display": "{{ treatment_name }}"
+								}
+							],
+	                    		"text": "{{ treatment_name }}"
+						},
+						"timingDuration": {
+							"system": "http://unitsofmeasure.org",
+							"code": "min",
+							"value": {{ treatment_duration }},
+							"unit": "minute"
+						},
+						"status": "active",
+						"name": "{{ treatment_name | replace: ' ', '_' }}",
+						"title": "{{ treatment_name }}",
+						"identifier": [
+							{
+								"system": "{{ wof-connect-identifiercodesystem-service-type-id }}",
+								"value": "{{ treatment_code }}"
+							}
+						]
+					}
+				}
+				{%- assign first_entry = false -%}
+				{%- assign emitted_treatment_types = emitted_treatment_types | append: treatment_code | append: "|" -%}
+			{%- endunless -%}
+
+			{%- assign schedule_key = "|" | append: schedule_id | append: "|" -%}
+			{%- unless emitted_schedules contains schedule_key -%}
+				{%- assign first_slot = slots | first -%}
+				{%- assign last_slot = slots | last -%}
+				{%- assign horizon_start = first_slot.tidStart | replace: ' ', 'T' -%}
+				{%- assign horizon_end = last_slot.tidStart | replace: ' ', 'T' -%}
+				{%- unless first_entry -%},{%- endunless -%}
+				{
+					"resource": {
+						"resourceType": "Schedule",
+						"id": "{{ schedule_id }}",
+						"meta": {
+							"tag": [
+								{
+									"system": "{{ wof-connect-codesystem-pms-system }}",
+									"code": "{{ source_system }}"
+								}
+							],
+							"profile": [
+								"{{ wof-connect-profile-schedule }}"
+							]
+						},
+						"actor": [
+							{
+								"reference": "PractitionerRole/{{ role_id }}",
+								"display": "{{ practitioner_name }}"
+							},
+							{
+								"reference": "ActivityDefinition/{{ treatment_code }}",
+								"display": "{{ treatment_name }}"
+							}
+						],
+						"planningHorizon": {
+							"start": "{{ horizon_start }}",
+							"end": "{{ horizon_end }}"
+						}
+					}
+				}
+				{%- assign first_entry = false -%}
+				{%- assign emitted_schedules = emitted_schedules | append: schedule_id | append: "|" -%}
+			{%- endunless -%}
+		{%- endfor -%}
+	]
+}

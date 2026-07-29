@@ -1,0 +1,109 @@
+{% comment %}
+==========================================================================
+Template:	Almasoft BookOp
+Purpose:	Generates a FHIR Bundle resource for the booked Appointment result.
+Version:	0.0.1
+Author:		Service Well
+Date:		2026-07-21
+
+Input: 
+	msg.meta + msg.data.bookOp.tidbokningKod
+	
+Output: 
+	Appointment Bundle with Appointment
+
+API: 
+	/tdl/v1/bokaTid
+	/tdl/v1/avbokaTid
+
+{% endcomment %}
+
+{% include "variables/canonicals" -%}
+
+{%- assign meta = msg.meta -%}
+{%- assign data = msg.data.bookOp -%}
+{%- assign source_system = meta.sourceSystem | default: "none" -%}
+{%- assign last_updated = meta.extractDate | default: 'now' | date: "yyyy-MM-dd'T'HH:mm:sszzz" -%}
+
+{%- assign p_treatment_type_code = meta.FhirQueryParam | where: "name", "BehandlingstypKod" | first -%}
+{%- assign p_treater_code = meta.FhirQueryParam | where: "name", "BehandlareKod" | first -%}
+{%- assign p_period_start = meta.FhirQueryParam | where: "name", "PeriodStart" | first -%}
+{%- assign p_period_end = meta.FhirQueryParam | where: "name", "PeriodSlut" | first -%}
+{%- assign p_start = meta.FhirQueryParam | where: "name", "Start" | first -%}
+{%- assign p_status = meta.FhirQueryParam | where: "name", "Status" | first -%}
+{%- assign p_status_value = p_status.value -%}
+
+{%- if p_status_value == "pending" -%}
+	{%- assign p_status_value = "booked" -%}
+{%- endif -%}
+
+{
+	"resourceType": "Bundle",
+	"type": "searchset",
+	"id": "{{ meta.requestId }}",
+	"total": 1,
+	"meta": {
+		"lastUpdated": "{{ last_updated }}",
+		"tag": [
+			{
+				"system": "{{wof-connect-codesystem-pms-system}}",
+				"code": "{{ source_system }}"
+			}
+		],
+		"profile": [ 
+			"{{ ihe-sched-avail-bundle }}" 
+		]
+	},
+	"entry": [
+		{
+			"resource": {
+				"resourceType": "Appointment",
+				"id": "{{ data.tidbokningKod }}",
+				"meta": {
+					"tag": [
+						{
+							"system": "{{ wof-connect-codesystem-pms-system }}",
+							"code": "{{ source_system }}"
+						}
+					],
+					"profile": [
+						"{{ wof-connect-profile-booking-appointment }}",
+						"{{ ihe-profile-appointment }}"
+					]
+				},
+				"identifier": [
+					{
+					"system": "{{ wof-connect-codesystem-identifier-slotid }}",
+					"value": "{{ data.tidbokningKod }}"
+					}
+				],
+				"status": "{{ p_status_value }}",
+				"serviceType": [
+					{
+						"coding": [
+							{
+								"system": "{{ wof-connect-identifiercodesystem-service-type-id }}",
+								"code": "{{ p_treatment_type_code.value }}"
+							}
+						]
+					}
+				],
+				"start": "{{ p_start.value }}",
+  				"requestedPeriod": [
+					{
+						"start": "{{ p_period_start.value }}",
+						"end": "{{ p_period_end.value }}"
+					}
+				],
+				"participant": [
+					{
+						"actor": {
+							"reference": "Practitioner/{{ p_treater_code.value }}"
+						},
+						"status": "accepted"
+					}
+				]
+			}
+		}
+	]
+}
